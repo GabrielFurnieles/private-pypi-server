@@ -1,0 +1,18 @@
+[project]
+name = "uv3"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "p2>=0.1.0",
+]
+
+
+[[tool.uv.index]]
+name = "private-pypi"
+url = "http://localhost:8080"
+explicit = true
+
+[tool.uv.sources]
+p2 = { index = "private-pypi" }

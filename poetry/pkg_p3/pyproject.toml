@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "p3"
+version = "0.1.0"
+description = "Package 3"
+authors = ["gabriel furnieles <gabifurnielesgarcia@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[[tool.poetry.source]]
+name = "private-pypi"
+url = "http://localhost:8080"
+priority = "explicit"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

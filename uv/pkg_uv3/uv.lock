@@ -1,0 +1,38 @@
+version = 1
+requires-python = ">=3.11"
+resolution-markers = [
+    "python_full_version < '3.12'",
+    "python_full_version >= '3.12'",
+]
+
+[[package]]
+name = "p1"
+version = "0.1.0"
+source = { registry = "http://localhost:8080/" }
+sdist = { url = "http://localhost:8080/packages/p1-0.1.0.tar.gz", hash = "sha256:0d708b65e5138db7a8d42008f8986540b7ac22ddb804374400fd48129878b631" }
+wheels = [
+    { url = "http://localhost:8080/packages/p1-0.1.0-py3-none-any.whl", hash = "sha256:10f780d2f7b582b2098883e89c9f20df0e2a42d0d09e4c79a27bf7feaca8640b" },
+]
+
+[[package]]
+name = "p2"
+version = "0.1.0"
+source = { registry = "http://localhost:8080/" }
+dependencies = [
+    { name = "p1" },
+]
+sdist = { url = "http://localhost:8080/packages/p2-0.1.0.tar.gz", hash = "sha256:70a154e6719eecef9b6f12fec37ade5cb987abd5879d9833ad417f1b110a69da" }
+wheels = [
+    { url = "http://localhost:8080/packages/p2-0.1.0-py3-none-any.whl", hash = "sha256:61c7fa098b465059228b3edb29e8e34950db1370d9492ca3b0aeb8844a52876a" },
+]
+
+[[package]]
+name = "uv3"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "p2" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "p2", specifier = ">=0.1.0", index = "http://localhost:8080/" }]
