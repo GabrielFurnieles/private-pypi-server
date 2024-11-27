@@ -13,7 +13,7 @@ In addition, the repository contains four packages built with both [Poetry](http
 
 
 ### Running the PyPI Server
-1. [Optional] Generate username and password using `httpasswd`[^1]
+1. Generate username and password using `htpasswd` [^1]
     ```
     htpasswd -c auth/.htpasswd [username]
     ```
@@ -23,20 +23,24 @@ In addition, the repository contains four packages built with both [Poetry](http
 3. Check that the PyPI server is running by navigating to `http://localhost:8080` in your browser.
 
 
-[^1]: If you don't want to genrate credentials remove lines 7-9 (included) and 13 from `docker.compose.yaml`
+[^1]: If you don't want to generate credentials remove lines 7-9 (included) and 13 from `docker.compose.yaml`
 
 
-> [!INFO]
+> [!NOTE]
 > To completely remove the PyPI server run `docker compose down -v` (-v flag removes volumes)
 
 
-> [!INFO]
-> To remove a package from the PyPI server run `curl --form ":action=remove_pkg" --form "name=[package-name]" --form "version=[package-version]" http://[username]:[password]@localhost:8080/`
+> [!TIP]
+> To remove a package from the PyPI server run:
+> ```
+> curl --form ":action=remove_pkg" --form "name=[package-name]" --form "version=[package-version]" http://[username]:[password]@localhost:8080/
+> ```
 
 
 ## Testing Poetry vs uv
 
-**Note:** The following commands are run using Ubuntu 22.04.
+> [!NOTE]
+> The following commands are run using **Ubuntu 22.04** and might change in other systems.
 
 ### Prerequisites
 - [Poetry](https://python-poetry.org/docs/#installation)
@@ -51,7 +55,7 @@ poetry config repositories.[repo-name] http://localhost:8080
 poetry config http-basic.[repo-name] [username] [password]
 ```
 
-Where `[repo-name]` is the name of the repository you want to add (in the packages is added as `private-pypi` so if you want to you another make sure you change it in the `pyproject.toml` file before continuing) and `[username]` and `[password]` are the credentials for the PyPI server.
+Where `[repo-name]` is the name of the repository you want to add (in the packages is added as `private-pypi` so if you want to use another name make sure to change it in the `pyproject.toml` file before continuing) and `[username]` and `[password]` are the credentials for the PyPI server.
 
 #### Add PyPI Server credentials to uv
 
@@ -98,7 +102,7 @@ uv add p2 --index private-pypi=http://localhost:8080
 uv sync
 ```
 
-No errors are raised. Test running:
+No errors are raised. Test it running:
 
 ```bash
 uv run uv3/module3.py
